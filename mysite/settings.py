@@ -40,6 +40,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # custom app added
+    'rest_framework_swagger',
+    # project app
+    'ability',
+    'education',
+    'about_me',
+    'comment',
+    'jobs',
+    'land_page',
+    'projects',
+    'social',
+    'user',
 ]
 
 MIDDLEWARE = [
