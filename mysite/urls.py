@@ -7,6 +7,7 @@ schema_view = get_swagger_view(title='Resume Back End API')
 urlpatterns = [
     path('api/docs', schema_view),
     path('admin/', admin.site.urls),
+    path('api/auth/', include('rest_framework.urls')),
     path('api/ability/', include('ability.api.urls')),
     path('api/about_me/', include('about_me.api.urls')),
     path('api/comment/', include('comment.api.urls')),
