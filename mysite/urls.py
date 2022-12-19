@@ -22,7 +22,7 @@ urlpatterns = [
     path('api/docs', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('admin/', admin.site.urls),
     path('api/auth/', include('rest_framework.urls')),
-    path('api/ability/', include('ability.api.urls')),
+    path('api/ability/', include('ability.api.urls'), name='ability'),
     # path('api/about_me/', include('about_me.api.urls')),
     # path('api/comment/', include('comment.api.urls')),
     # path('api/education/', include('education.api.urls')),
