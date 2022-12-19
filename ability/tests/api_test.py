@@ -49,11 +49,52 @@ class AbilityAPITest(APITestCase):
     def test_create_ability_without_login(self):
         url = reverse('ability:ability-list')
         payload = {
-
+            "title": "second ability test",
+            'desc': 'test description',
+            'percent': 80
         }
+        res = self.client.post(url, data=payload)
+        self.assertEqual(res.status_code, status.HTTP_403_FORBIDDEN)
 
-    def test_update_ability(self):
-        pass
+    def test_create_ability_with_login(self):
+        url = reverse('ability:ability-list')
+        payload = {
+            "title": "second ability test",
+            'desc': 'test description',
+            'percent': 80
+        }
+        self.client.force_login(self.user)
+        len_before_create = len(Ability.objects.all())
+        res = self.client.post(url, data=payload)
+        self.assertEqual(res.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(len(Ability.objects.all()), len_before_create + 1)
 
-    def test_delete_ability(self):
-        pass
+    def test_update_ability_without_login(self):
+        url = reverse('ability:ability-detail', args=[self.test_ability.id])
+        payload = {
+            'title': 'new test'
+        }
+        res = self.client.put(url, data=payload)
+        self.assertEqual(res.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_update_ability_with_login(self):
+        url = reverse('ability:ability-detail', args=[self.test_ability.id])
+        payload = {
+            'title': 'new test'
+        }
+        self.client.force_login(self.user)
+        res = self.client.patch(url, data=payload)
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        self.assertEqual(Ability.objects.get(id=res.data['id']).title, 'new test')
+
+    def test_delete_ability_without_login(self):
+        url = reverse('ability:ability-detail', args=[self.test_ability.id])
+        res = self.client.delete(url)
+        self.assertEqual(res.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_delete_ability_with_login(self):
+        url = reverse('ability:ability-detail', args=[self.test_ability.id])
+        self.client.force_login(self.user)
+        res = self.client.delete(url)
+        self.assertEqual(res.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertEqual(len(Ability.objects.filter(visible=True)), 0)
