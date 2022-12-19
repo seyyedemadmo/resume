@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'whitenoise.runserver_nostatic',
     # custom app added
-    'rest_framework_swagger',
     'drf_yasg',
     'rest_framework',
     # project app
