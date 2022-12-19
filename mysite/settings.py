@@ -162,3 +162,8 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SESSION_COOKIE_AGE = 5 * 60
+
+SWAGGER_SETTINGS = {
+    'LOGIN_URL': '/api/auth/login',
+    'LOGOUT_URL': '/api/auth/logout',
+}
