@@ -5,11 +5,10 @@ from django.urls import path, include
 
 from ability.api.views import AbilityListCreateView, AbilityRetrieveUpdateDestroyView
 
-router = routers.DefaultRouter()
-router.register('', AbilityListCreateView, basename='list--ability')
-router.register('', AbilityRetrieveUpdateDestroyView, basename='update-retrieve-destroy-ability')
-
 app_name = 'ability'
+router = routers.DefaultRouter()
+router.register('', AbilityListCreateView, basename='ability')
+router.register('', AbilityRetrieveUpdateDestroyView, basename='ability')
 
 urlpatterns = [
                   # path('all/', AbilityRetrieveListView),
